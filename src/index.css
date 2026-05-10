@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient-primary: linear-gradient(135deg, #14b8a6 0%, #7C3AED 100%);
+    --gradient-dark: linear-gradient(135deg, #0d9488 0%, #6D28D9 100%);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body.rtl {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+  }
+
+  ::selection {
+    background: #14b8a6;
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #14b8a6;
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-6px);
+  }
+
+  .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .btn-primary {
+    background: var(--gradient-primary);
+    transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+  }
+
+  .section-title {
+    font-family: 'Clash Display', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .mesh-gradient {
+    background: radial-gradient(ellipse at 20% 50%, rgba(20, 184, 166, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 60% 80%, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .writing-vertical {
+    writing-mode: vertical-rl;
+  }
+}
+
+/* Noise texture overlay */
+.noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.03;
+}
+
+/* Glow effects */
+.glow-teal {
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.3), 0 0 60px rgba(20, 184, 166, 0.1);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), 0 0 60px rgba(124, 58, 237, 0.1);
+}
+
+/* Animated gradient border */
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-border {
+  background: linear-gradient(270deg, #14b8a6, #7C3AED, #14b8a6);
+  background-size: 400% 400%;
+  animation: borderRotate 4s ease infinite;
+}
+
+/* Skill bar animation */
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: var(--target-width); }
+}
+
+.skill-bar-fill {
+  animation: fillBar 1.5s ease-out forwards;
+}
+
+/* Mobile menu */
+.mobile-menu-enter {
+  animation: slideDown 0.3s ease forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
