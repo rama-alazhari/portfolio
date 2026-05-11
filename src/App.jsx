@@ -533,20 +533,17 @@ function Hero({ lang, t }) {
                 <ArrowRight size={16} />
               </motion.button>
 
-              <motion.button
+              <motion.a
+                href="/Rama-Alazhari-CV.pdf"
+                download="Rama-Alazhari-CV.pdf"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document
-                    .getElementById("projects")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
                 className="px-8 py-3.5 rounded-full dark:border-slate-700 border-slate-300 border dark:text-slate-300 text-slate-700 dark:hover:border-teal-500 hover:border-teal-500 dark:hover:text-teal-400 hover:text-teal-600 transition-all font-semibold flex items-center gap-2 text-sm"
                 style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
               >
                 <Download size={16} />
                 {t.hero.cta2}
-              </motion.button>
+              </motion.a>
             </motion.div>
 
             {/* Stats Row (مثل Jo Sam: 40+ Projects, 1+ Years...) */}
@@ -1195,15 +1192,30 @@ function Projects({ lang, t }) {
   // Add images and links to your projects — edit paths here:
   const projectsMeta = [
     { image: plantProject, link: null, featured: true }, // Plant Nursery
-    {image: unifiProject, link: "https://unifi-me.com/en/home",featured: true,}, // UNiFi
-    {image: motionAuctionsProject,link: "https://www.motionauctions.com/",featured: true,}, //motion Auctions
-     { image: laravelProject, link: null, featured: true }, //Advanced Admin Suite
+    {
+      image: unifiProject,
+      link: "https://unifi-me.com/en/home",
+      featured: true,
+    }, // UNiFi
+    {
+      image: motionAuctionsProject,
+      link: "https://www.motionauctions.com/",
+      featured: true,
+    }, //motion Auctions
+    { image: laravelProject, link: null, featured: true }, //Advanced Admin Suite
     { image: aiSolutionProject, link: "https://aetheris.ae/", featured: false }, // AI Solutions
-    { image: AlAwaielProject, link: "https://www.aljabalhoses.ae/", featured: true }, // Al Awaiel
-        { image: mediaclProject, link: null, featured: false }, //medical
+    {
+      image: AlAwaielProject,
+      link: "https://www.aljabalhoses.ae/",
+      featured: true,
+    }, // Al Awaiel
+    { image: mediaclProject, link: null, featured: false }, //medical
     { image: figmaProject, link: null, featured: false }, //figma
-{ image: wordpressProject, link: "https://signaturebutchery.com/", featured: false }, //wordpress
-   
+    {
+      image: wordpressProject,
+      link: "https://signaturebutchery.com/",
+      featured: false,
+    }, //wordpress
   ];
 
   const projects = d.projects.map((p, i) => ({ ...p, ...projectsMeta[i] }));
@@ -1383,7 +1395,7 @@ function Projects({ lang, t }) {
                 <div className="absolute top-2 start-2">
                   <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-teal-500 text-white flex items-center gap-1">
                     <Star size={10} />
-                     {lang === "ar" ? "مميز" : "Featured"}
+                    {lang === "ar" ? "مميز" : "Featured"}
                   </span>
                 </div>
               )}
@@ -1551,9 +1563,9 @@ function Contact({ lang, t }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service_id: "service_6utv1vn",    // 👈 استبدلي هذا بعد التسجيل
-          template_id: "template_ddg3kuz",  // 👈 استبدلي هذا بعد التسجيل
-          user_id: "4tUwVM3XaDzDGyZrl",       // 👈 استبدلي هذا بعد التسجيل
+          service_id: "service_6utv1vn", // 👈 استبدلي هذا بعد التسجيل
+          template_id: "template_ddg3kuz", // 👈 استبدلي هذا بعد التسجيل
+          user_id: "4tUwVM3XaDzDGyZrl", // 👈 استبدلي هذا بعد التسجيل
           template_params: {
             from_name: form.name,
             from_email: form.email,
@@ -1581,42 +1593,80 @@ function Contact({ lang, t }) {
 
   return (
     <Section id="contact" className="dark:bg-slate-900/30">
-      <SectionHeader title={t.contact.title} subtitle={t.contact.subtitle} lang={lang} />
+      <SectionHeader
+        title={t.contact.title}
+        subtitle={t.contact.subtitle}
+        lang={lang}
+      />
       <div className="grid md:grid-cols-2 gap-12">
         {/* Info */}
         <motion.div variants={fadeUp} className="space-y-6">
-          <p className="dark:text-slate-400 text-slate-500 leading-relaxed" style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}>
+          <p
+            className="dark:text-slate-400 text-slate-500 leading-relaxed"
+            style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+          >
             {lang === "ar"
               ? "هل لديك مشروع تريد بنائه؟ هل تبحث عن مطورة ماهرة؟ تواصل معي وسأرد عليك في أسرع وقت!"
               : "Have a project you'd like to build? Looking for a skilled developer? Reach out and I'll get back to you as soon as possible!"}
           </p>
           <div className="space-y-4">
             {[
-              { icon: <Mail size={18} />, value: d.email, href: `mailto:${d.email}` },
-              { icon: <Phone size={18} />, value: d.phone, href: `tel:${d.phone}` },
+              {
+                icon: <Mail size={18} />,
+                value: d.email,
+                href: `mailto:${d.email}`,
+              },
+              {
+                icon: <Phone size={18} />,
+                value: d.phone,
+                href: `tel:${d.phone}`,
+              },
               { icon: <MapPin size={18} />, value: d.location[lang] },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0">{item.icon}</div>
+                <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0">
+                  {item.icon}
+                </div>
                 {item.href ? (
-                  <a href={item.href} className="dark:text-slate-300 text-slate-600 hover:text-teal-500 transition-colors text-sm">{item.value}</a>
+                  <a
+                    href={item.href}
+                    className="dark:text-slate-300 text-slate-600 hover:text-teal-500 transition-colors text-sm"
+                  >
+                    {item.value}
+                  </a>
                 ) : (
-                  <span className="dark:text-slate-300 text-slate-600 text-sm" style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}>{item.value}</span>
+                  <span
+                    className="dark:text-slate-300 text-slate-600 text-sm"
+                    style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+                  >
+                    {item.value}
+                  </span>
                 )}
               </div>
             ))}
           </div>
 
           <div className="pt-4">
-            <p className="text-sm dark:text-slate-500 text-slate-400 mb-4" style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}>{t.contact.or}</p>
+            <p
+              className="text-sm dark:text-slate-500 text-slate-400 mb-4"
+              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+            >
+              {t.contact.or}
+            </p>
             <div className="flex gap-3">
               {[
                 { icon: <Github size={18} />, href: d.github },
                 { icon: <Linkedin size={18} />, href: d.linkedin },
                 { icon: <Instagram size={18} />, href: d.instagram },
               ].map((s, i) => (
-                <motion.a key={i} href={s.href} target="_blank" rel="noreferrer" whileHover={{ scale: 1.15, y: -3 }}
-                  className="w-10 h-10 rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 flex items-center justify-center dark:text-slate-400 text-slate-500 dark:hover:text-teal-400 hover:text-teal-500 dark:hover:border-teal-500/50 hover:border-teal-400 transition-all">
+                <motion.a
+                  key={i}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  whileHover={{ scale: 1.15, y: -3 }}
+                  className="w-10 h-10 rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-700 border-slate-200 flex items-center justify-center dark:text-slate-400 text-slate-500 dark:hover:text-teal-400 hover:text-teal-500 dark:hover:border-teal-500/50 hover:border-teal-400 transition-all"
+                >
                   {s.icon}
                 </motion.a>
               ))}
@@ -1625,23 +1675,57 @@ function Contact({ lang, t }) {
         </motion.div>
 
         {/* Form */}
-        <motion.div variants={fadeUp} className="dark:bg-slate-800/40 bg-white rounded-2xl p-6 border dark:border-slate-700/50 border-slate-200 shadow-sm space-y-4">
+        <motion.div
+          variants={fadeUp}
+          className="dark:bg-slate-800/40 bg-white rounded-2xl p-6 border dark:border-slate-700/50 border-slate-200 shadow-sm space-y-4"
+        >
           <div>
-            <label className="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2" style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}>{t.contact.name}</label>
-            <input type="text" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+            <label
+              className="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2"
+              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+            >
+              {t.contact.name}
+            </label>
+            <input
+              type="text"
+              value={form.name}
+              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
               className="w-full px-4 py-3 rounded-xl dark:bg-slate-900/50 bg-slate-50 dark:border-slate-700 border-slate-200 border dark:text-white text-slate-900 text-sm focus:outline-none focus:border-teal-500 transition-colors"
-              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }} />
+              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+            />
           </div>
           <div>
-            <label className="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2" style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}>{t.contact.email}</label>
-            <input type="email" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-              className="w-full px-4 py-3 rounded-xl dark:bg-slate-900/50 bg-slate-50 dark:border-slate-700 border-slate-200 border dark:text-white text-slate-900 text-sm focus:outline-none focus:border-teal-500 transition-colors" />
+            <label
+              className="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2"
+              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+            >
+              {t.contact.email}
+            </label>
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, email: e.target.value }))
+              }
+              className="w-full px-4 py-3 rounded-xl dark:bg-slate-900/50 bg-slate-50 dark:border-slate-700 border-slate-200 border dark:text-white text-slate-900 text-sm focus:outline-none focus:border-teal-500 transition-colors"
+            />
           </div>
           <div>
-            <label className="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2" style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}>{t.contact.message}</label>
-            <textarea rows={5} value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+            <label
+              className="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2"
+              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+            >
+              {t.contact.message}
+            </label>
+            <textarea
+              rows={5}
+              value={form.message}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, message: e.target.value }))
+              }
               className="w-full px-4 py-3 rounded-xl dark:bg-slate-900/50 bg-slate-50 dark:border-slate-700 border-slate-200 border dark:text-white text-slate-900 text-sm focus:outline-none focus:border-teal-500 transition-colors resize-none"
-              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }} />
+              style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
+            />
           </div>
           <motion.button
             onClick={handleSubmit}
@@ -1653,10 +1737,29 @@ function Contact({ lang, t }) {
               ${status === "sending" ? "opacity-70 cursor-not-allowed" : ""}`}
             style={{ fontFamily: lang === "ar" ? "Cairo" : undefined }}
           >
-            {status === "sending" ? (lang === "ar" ? "جاري الإرسال..." : "Sending...") :
-             status === "sent"    ? (lang === "ar" ? "✓ تم الإرسال" : "✓ Sent!") :
-             status === "error"   ? (lang === "ar" ? "✗ فشل الإرسال" : "✗ Error") :
-             <><Send size={16} /> {t.contact.send}</>}
+            {status === "sending" ? (
+              lang === "ar" ? (
+                "جاري الإرسال..."
+              ) : (
+                "Sending..."
+              )
+            ) : status === "sent" ? (
+              lang === "ar" ? (
+                "✓ تم الإرسال"
+              ) : (
+                "✓ Sent!"
+              )
+            ) : status === "error" ? (
+              lang === "ar" ? (
+                "✗ فشل الإرسال"
+              ) : (
+                "✗ Error"
+              )
+            ) : (
+              <>
+                <Send size={16} /> {t.contact.send}
+              </>
+            )}
           </motion.button>
         </motion.div>
       </div>
